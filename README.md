@@ -10,4 +10,6 @@ Creating a feature request here is the best way to coordinate who wants to imple
 
 **Documentation:** https://esphome.io/
 
+**Discord Chat:** https://discord.gg/KhAMKr
+
 For issues, please go to [the issue tracker](https://github.com/esphome/issues/issues).
