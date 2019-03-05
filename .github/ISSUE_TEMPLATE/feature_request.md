@@ -19,3 +19,6 @@ about: Suggest an idea for ESPHome
 
 **Additional context**
 <!-- Add any other context about the feature request here. -->
+
+
+<!-- LEAVE THIS LINE AS-IS AND DON'T DELETE IT, OTHERWISE THE FEATURE REQUEST WILL BE CLOSED AUTOMATICALLY. -->

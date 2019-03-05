@@ -1,0 +1,13 @@
+comment: >-
+  This feature request was auto-closed because the  template was not filled out.
+
+  The ESPHome developers invest lots of time to maintain this project, so
+  please at least fill out the feature request template so that a bunch of standard
+  questions don't need to be asked again each time.
+
+  Thank you for taking the time to create this feature request.
+issueConfigs:
+- content:
+  - "OTHERWISE THE FEATURE REQUEST WILL BE CLOSED AUTOMATICALLY"
+
+caseInsensitive: false
