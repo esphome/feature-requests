@@ -9,5 +9,8 @@ comment: >-
 issueConfigs:
 - content:
   - "OTHERWISE THE FEATURE REQUEST WILL BE CLOSED AUTOMATICALLY"
+- content:
+  - "OTHERWISE THE ISSUE WILL BE CLOSED AUTOMATICALLY"
 
-caseInsensitive: false
+caseInsensitive: true
+label: "missing-template"
