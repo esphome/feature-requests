@@ -1,6 +1,0 @@
-# Configuration for Reaction Comments - https://github.com/dessant/reaction-comments
-exemptLabels: []
-
-reactionComment: >
-  :wave: @{comment-author}, please use [GitHub reactions](https://git.io/vhzhC) instead of
-  writing a comment (notification spam). Thanks!
