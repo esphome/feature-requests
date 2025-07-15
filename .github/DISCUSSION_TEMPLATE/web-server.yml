@@ -1,0 +1,44 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to the ESPHome Web Server!** 🌐
+
+        ### 🖥️ Improve the device's built-in web interface
+
+        This form is for requesting **new features or improvements** to the ESPHome Web Server component.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🐛 Reporting bugs or issues with the Web Server → [Report an issue](https://github.com/esphome/esphome-webserver/issues/new/choose)
+        - 🎨 Builder / dashboard feature or enhancements → [Use the "Builder features or enhancements" category](https://github.com/orgs/esphome/discussions/new?category=builder-features-or-enhancements)
+
+        Your ideas help make the device's web interface more powerful and user-friendly!
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the Web Server enhancement
+      description: What new feature or improvement would you like to see in the ESPHome Web Server? How would it work?
+      placeholder: |
+        Example: I'd like the web server to include a real-time graph of sensor data, similar to Home Assistant's history graphs.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would this enhancement benefit you or other users? What problems would it solve?
+      placeholder: |
+        Example: This would allow me to quickly monitor sensor trends directly from the device without needing an external dashboard, which is useful for debugging or quick checks.
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual_examples
+    attributes:
+      label: Visual examples (optional)
+      description: Mockups, screenshots, or sketches of how this might look or function.
+      placeholder: |
+        Example: Here's a sketch of how the graph could

@@ -1,0 +1,46 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to the ESPHome Native API!** 🔌
+
+        ### 🚀 Enhance the core communication protocol
+
+        This form is for requesting **new features or improvements** to the ESPHome Native API server or protocol.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🐛 Reporting bugs or issues with the Native API → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - ➕ Adding new features to other existing components → [Use the "Component enhancements" category](https://github.com/orgs/esphome/discussions/new?category=component-enhancements)
+
+        Your ideas help make ESPHome's native communication more powerful and efficient!
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the Native API enhancement
+      description: What new feature or improvement would you like to see in the ESPHome Native API server or protocol? How would it work?
+      placeholder: |
+        Example: I'd like the Native API to support real-time streaming of log messages without polling.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would this enhancement benefit you or other users? What problems would it solve?
+      placeholder: |
+        Example: This would allow for more immediate debugging and monitoring of devices, especially in scenarios where polling is inefficient or too slow.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to related discussions, protocol specifications, or additional context.
+      placeholder: |
+        Example: Similar to gRPC streaming, this could improve responsiveness.
+    validations:
+      required: false

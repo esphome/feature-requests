@@ -1,0 +1,46 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to the ESPHome MQTT component!** 💬
+
+        ### 📡 Improve MQTT communication
+
+        This form is for requesting **new features or improvements** to the ESPHome MQTT component.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🐛 Reporting bugs or issues with MQTT → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - ➕ Adding new features to other existing components → [Use the "Component enhancements" category](https://github.com/orgs/esphome/discussions/new?category=component-enhancements)
+
+        Your ideas help make ESPHome's MQTT integration more robust and versatile!
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the MQTT enhancement
+      description: What new feature or improvement would you like to see in the ESPHome MQTT component? How would it work?
+      placeholder: |
+        Example: I'd like the MQTT component to support MQTT 5.0 features like topic aliases or user properties.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would this enhancement benefit you or other users? What problems would it solve?
+      placeholder: |
+        Example: This would allow me to reduce bandwidth usage by using topic aliases, especially for devices with many sensors.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to MQTT specifications, related discussions, or additional context.
+      placeholder: |
+        Example: MQTT 5.0 specification: [link]
+    validations:
+      required: false
