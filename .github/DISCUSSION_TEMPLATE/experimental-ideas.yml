@@ -1,0 +1,58 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for sharing your experimental idea!** 🚀
+
+        ### 💡 This is the place for wild ideas!
+
+        This form is for **crazy, experimental, or early-stage ideas** that might reshape how we think about creating smart home devices.
+
+        Don't worry about:
+        - Whether it's technically feasible right now
+        - If it fits into existing categories
+        - Whether anyone else has suggested it
+
+        We want to hear your creative vision for the future of ESPHome!
+
+  - type: textarea
+    id: idea_description
+    attributes:
+      label: Describe your idea
+      description: Let your imagination run wild! What's your vision?
+      placeholder: |
+        Example: What if ESPHome could use computer vision to understand what it sees on the camera and automatically adjusts the screen brightness.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why_cool
+    attributes:
+      label: Why is this exciting?
+      description: What makes this idea special or game-changing?
+      placeholder: |
+        Example: This would make devices more intuitive, adapting to the environment without needing manual adjustments. Imagine lights that know when you're watching a movie and dim automatically!
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Potential use cases
+      description: Dream up some scenarios where this would be amazing.
+      placeholder: |
+        Example:
+        - A smart mirror that changes its display based on the user's mood or activity.
+        - A smart heater that learns from your daily routines and optimizes energy usage.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Similar concepts, sci-fi inspiration, sketches, or just more ideas!
+      placeholder: |
+        Example: I saw a sci-fi movie where devices adapted to the user's needs in real-time. It inspired me to think about how we could do that with ESPHome.
+    validations:
+      required: false
