@@ -1,0 +1,59 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for your feature request!** ❤️
+
+        ### 🤷 Not sure where this belongs? No problem!
+
+        Sometimes ideas don't fit neatly into categories, and that's okay. Use this form for any feature request when you're not sure which category is right.
+
+        Don't worry about getting it perfect - we'll help figure out where it belongs (or maybe even spawn new categories in the future)!
+
+  - type: textarea
+    id: request_description
+    attributes:
+      label: Describe your request
+      description: What would you like ESPHome to do?
+      placeholder: |
+        Example: I'd like ESPHome to automatically recover from failed updates, so I don't have to manually reinstall devices via USB every time an OTA update fails.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why_unsure
+    attributes:
+      label: Why the uncertainty?
+      description: What makes it hard to categorize this request? (optional)
+      placeholder: |
+        Example: I do not know if this is should be core functionality or part of the ota component.
+    validations:
+      required: false
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would you use this feature?
+      placeholder: |
+        Example: I want to fix my ota update and reinstall it again without pulling my device out of the wall.
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_areas
+    attributes:
+      label: What areas might this affect?
+      description: Take your best guess at what parts of ESPHome this might involve. (optional)
+      placeholder: |
+        Example: ota, core
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Any other information that might help us understand your request.
+    validations:
+      required: false
