@@ -1,0 +1,35 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for helping improve our documentation!** ❤️
+
+        ### ⚠️ Before you submit
+
+        This form is for suggesting **structural improvements to our documentation**.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 📄 Improvements to specific component documentation → Use the "Edit this page on GitHub" link at the bottom of that component's documentation page
+        - ✏️ Fixing typos or small updates → [Edit directly on the docs site](https://esphome.io/) using the "Edit this page on GitHub" link
+        - 🐛 Reporting documentation errors → [Open an issue in the docs repo](https://github.com/esphome/esphome-docs/issues)
+
+  - type: textarea
+    id: improvement_description
+    attributes:
+      label: Describe the improvement
+      description: What structural or organizational change would make our documentation better? Include what problems the current structure causes and how you'd improve it.
+      placeholder: |
+        Example: The current automation documentation is fragmented - triggers, conditions, and actions are explained separately, making it hard for new users to understand how they work together.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Examples from other projects, specific user groups affected, or offers to help.
+      placeholder: |
+        Example: The Home Assistant documentation has great example-based learning: [link]. I'd be happy to contribute some examples.
+    validations:
+      required: false
