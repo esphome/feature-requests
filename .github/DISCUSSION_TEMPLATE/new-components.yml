@@ -1,0 +1,58 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting a new component for ESPHome!** ❤️
+
+        ### ⚠️ Before you submit
+
+        This form is **ONLY** for requesting a brand new component that doesn't exist yet.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - ➕ Adding device compatibility or new features to existing components → [Use the "Component enhancements" category](https://github.com/orgs/esphome/discussions/new?category=component-enhancements)
+        - 📦 Requesting external components to become built-in → If an external component exists, we consider the request resolved
+        - 🐛 Reporting Issues with existing built-in components → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - 🎨 Issues & feature requests with external components → Report to the external component author/project directly
+
+        Please provide as much detail as possible to help the community evaluate your request.
+
+  - type: textarea
+    id: feature
+    attributes:
+      label: Describe the component you'd like
+      description: Include the name of the chip / module / device and what features you'd expect to work.
+      placeholder: |
+        Example: I'd like to see support for EH1234 temperature sensor.
+    validations:
+      required: true
+
+  - type: textarea
+    id: usecases
+    attributes:
+      label: What are your use cases for this component?
+      description: Describe how you'd use this component. Specific examples help others understand the value.
+      placeholder: |
+        Example: I'd put this temperature sensor in my freezer to give me an accurate reading.
+    validations:
+      required: false
+
+  - type: textarea
+    id: access
+    attributes:
+      label: Is there a public datasheet, documentation and/or schematics?
+      description: If available, share links to API references, datasheets or reverse-engineering efforts.
+      placeholder: |
+        Example: https://api.brandx.com/docs or a GitHub repo with protocol information.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to related forum threads, videos, photos, or your own research are welcome.
+      placeholder: |
+        Example: Forum post – https://community.home-assistant.io/t/support-brandx/123456
+    validations:
+      required: false

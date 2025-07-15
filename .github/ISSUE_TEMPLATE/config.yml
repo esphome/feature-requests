@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Feature Request
+    url: https://github.com/orgs/esphome/discussions/new/choose
+    about: Please use the discussions for feature requests.
   - name: Issue Tracker
     url: https://github.com/esphome/issues
     about: Please create bug reports in the dedicated issue tracker.
