@@ -1,0 +1,66 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to an existing component!** ❤️
+
+        ### ⚠️ Before you submit
+
+        This form is for requesting **new features or improvements** to existing built-in components.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🆕 Requesting a brand new component → [Use the "New components" category](https://github.com/orgs/esphome/discussions/new?category=new-components)
+        - 🐛 Reporting bugs or issues → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - 🎨 Feature requests for external components → Report to the external component author/project directly
+
+        Please provide as much detail as possible to help the community evaluate your request.
+
+  - type: input
+    id: component_name
+    attributes:
+      label: Component name
+      description: >
+        The name of the component, for example api, adc or lvgl.
+    validations:
+      required: true
+
+  - type: input
+    id: component_link
+    attributes:
+      label: Link to component documentation on our website
+      placeholder: "https://esphome.io/components/..."
+      description: |
+        Providing a link [to the documentation][docs] helps us categorize the feature request.
+
+        [docs]: https://esphome.io/components/
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the enhancement
+      description: What would you like to improve? Please explain how it works today and how you'd like it to work instead.
+      placeholder: |
+        Example: Currently, the component only exposes temperature, but the chip support humidity as well.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: Why is this enhancement important? How would you use it?
+      placeholder: |
+        Example: This would allow me to create automations that adjust the fans based on humidity readings.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to device documentation, datasheets, related issues, or other relevant information.
+      placeholder: |
+        Example: Device manual showing these features - https://example.com/manual.pdf
+    validations:
+      required: false
