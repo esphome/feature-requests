@@ -1,0 +1,55 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to our builder / dashboard!** ❤️
+
+        ### ⚠️ Before you submit
+
+        This form is for requesting **new builder / dashboard features or visual enhancements**.
+
+        **This is NOT for:**
+        - 🆘 Support using the builder / dashboard? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🐛 Reporting install / compilation issues → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - 🐛 Reporting bugs in the builder / dashboard → [Report an issue](https://github.com/esphome/dashboard/issues/new/choose)
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the enhancement
+      description: What builder / dashboard feature would you like to add or improve?
+      placeholder: |
+        Example: I'd like a to see my devices in a list instead of a grid.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would this improvement make your builder / dashboard better?
+      placeholder: |
+        Example: This would allow me to see all my devices in a list format, making it easier to manage them.
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual_examples
+    attributes:
+      label: Visual examples
+      description: Mockups, screenshots, or sketches of how this might look. (optional)
+      placeholder: |
+        Example: Here's a mockup I created: [link to image]
+        Or: Similar to how Home Assistant displays devices...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to similar implementations, related discussions, or additional context.
+      placeholder: |
+        Example: Home Assistant does data tables nicely - [link]
+    validations:
+      required: false
