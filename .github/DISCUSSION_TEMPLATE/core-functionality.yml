@@ -1,0 +1,65 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting improvements to ESPHome's core!** 🏗️
+
+        ### 🔧 This is for foundational improvements
+
+        This form is for **architectural and core functionality improvements** that enhance ESPHome's foundation.
+
+        Perfect for:
+        - Performance and efficiency improvements
+        - Core architecture enhancements
+        - Fundamental system capabilities
+
+        **This is NOT for:**
+        - 🐛 Reporting bugs or issues with ESPHome → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - ➕ Adding new features to existing components → [Use the "Component enhancements" category](https://github.com/orgs/esphome/discussions/new?category=component-enhancements)
+        - 🎨 Builder / dashboard feature or enhancements → [Use the "Builder features or enhancements" category](https://github.com/orgs/esphome/discussions/new?category=builder-features-or-enhancements)
+        - 📦 Requesting external components to become built-in → If an external component exists, we consider the request resolved
+        - 🚀 Wild or experimental ideas → [Use the "Experimental ideas" category](https://github.com/orgs/esphome/discussions/new?category=experimental-ideas)
+
+        Your ideas here help shape the backbone of ESPHome!
+
+  - type: textarea
+    id: improvement_description
+    attributes:
+      label: Describe your core improvement
+      description: What foundational aspect of ESPHome would you like to enhance?
+      placeholder: |
+        Example: It would be great if ESPHome could ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_limitations
+    attributes:
+      label: Current limitations
+      description: What problems or limitations does the current implementation have?
+      placeholder: |
+        Example: Currently, users have ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical_benefits
+    attributes:
+      label: Technical benefits
+      description: How would this improvement enhance ESPHome's core capabilities?
+      placeholder: |
+        Example:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Any other details, similar features in other systems, or relevant information?
+      placeholder: |
+        Example: ...
+    validations:
+      required: false
