@@ -1,0 +1,49 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to ESPHome's protocol support!** 📡
+
+        ### 🌐 Expand connectivity options
+
+        This form is for requesting **new features or improvements** to ESPHome's support for communication protocols **other than Native API, MQTT, or Web Server**.
+
+        **This is NOT for:**
+        - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🐛 Reporting bugs or issues with existing protocols → [Report an issue](https://github.com/esphome/esphome/issues/new/choose)
+        - ➕ Adding new features to existing components → [Use the "Component enhancements" category](https://github.com/orgs/esphome/discussions/new?category=component-enhancements)
+        - 🔌 Native API enhancements → [Use the "Native API" category](https://github.com/orgs/esphome/discussions/new?category=native-api)
+        - 💬 MQTT enhancements → [Use the "MQTT" category](https://github.com/orgs/esphome/discussions/new?category=mqtt)
+        - 🖥️ Web Server enhancements → [Use the "Web Server" category](https://github.com/orgs/esphome/discussions/new?category=web-server)
+
+        Your ideas help make ESPHome compatible with an even wider range of devices and systems!
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the protocol enhancement
+      description: What new feature or improvement would you like to see for a specific communication protocol (e.g., Modbus, BLE, LoRa, etc.)? How would it work?
+      placeholder: |
+        Example: I'd like ESPHome to support Modbus TCP client functionality, allowing it to read and write registers from Modbus TCP devices.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would this enhancement benefit you or other users? What problems would it solve?
+      placeholder: |
+        Example: This would allow me to integrate ESPHome devices with industrial PLCs or other Modbus TCP servers, expanding its use in automation and control systems.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to protocol specifications, related discussions, or additional context.
+      placeholder: |
+        Example: Modbus TCP specification: [link]
+    validations:
+      required: false
