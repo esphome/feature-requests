@@ -1,0 +1,238 @@
+name: Auto-label component enhancements
+
+on:
+  discussion:
+    types: [created, edited]
+
+permissions:
+  discussions: write
+
+jobs:
+  label-component:
+    runs-on: ubuntu-latest
+    if: github.event.discussion.category.slug == 'component-enhancements'
+
+    steps:
+      - name: Extract component name and details
+        id: extract
+        uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            // For edited discussions, we need to fetch the full discussion body
+            let body = '';
+            if (context.eventName === 'discussion' && context.payload.action === 'edited') {
+              // Fetch the full discussion details
+              const discussion = await github.graphql(`
+                query($nodeId: ID!) {
+                  node(id: $nodeId) {
+                    ... on Discussion {
+                      body
+                    }
+                  }
+                }
+              `, {
+                nodeId: context.payload.discussion.node_id
+              });
+              body = discussion.node.body;
+            } else {
+              body = context.payload.discussion.body;
+            }
+
+            console.log(`Event: ${context.eventName}, Action: ${context.payload.action}`);
+            console.log(`Body length: ${body.length}`);
+            console.log(`First 300 chars of body: ${body.substring(0, 300)}`);
+
+            // Extract component name - handle single newline
+            const componentMatch = body.match(/###\s*Component name\s*\n\s*(.+?)(?=\n\s*\n|\n###|$)/s);
+            const componentName = componentMatch ? componentMatch[1].trim() : '';
+
+            // Extract component link - handle "_No response_" as empty
+            const linkMatch = body.match(/###\s*Link to component documentation on our website\s*\n\s*(.+?)(?=\n\s*\n|\n###|$)/s);
+            const componentLink = linkMatch && linkMatch[1].trim() !== '_No response_' ? linkMatch[1].trim() : '';
+
+            // Extract enhancement description
+            const descriptionMatch = body.match(/###\s*Describe the enhancement\s*\n\s*([\s\S]+?)(?=\n###|$)/);
+            const enhancementDescription = descriptionMatch ? descriptionMatch[1].trim() : '';
+
+            console.log(`Extracted - Name: "${componentName}", Link: "${componentLink}", Description: "${enhancementDescription.substring(0, 50)}..."`);
+
+            core.setOutput('component_name', componentName);
+            core.setOutput('component_link', componentLink);
+            core.setOutput('enhancement_description', enhancementDescription);
+            core.setOutput('full_body', body);
+
+            console.log(`Component name: ${componentName}`);
+            console.log(`Component link: ${componentLink}`);
+            console.log(`Enhancement description: ${enhancementDescription.substring(0, 100)}...`);
+
+      - name: Find matching components
+        id: find_components
+        uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const componentName = '${{ steps.extract.outputs.component_name }}';
+            const componentLink = '${{ steps.extract.outputs.component_link }}';
+
+            // Fetch all components with error handling
+            let components = [];
+            try {
+              const response = await fetch('https://data.esphome.io/components.json');
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+              components = await response.json();
+              components = components["components"] || [];
+            } catch (error) {
+              console.error('Failed to fetch components:', error);
+              core.setOutput('found', 'error');
+              return;
+            }
+
+            // Try to extract domain from link first
+            let domain = '';
+            if (componentLink) {
+              const linkMatch = componentLink.match(/\/components\/([^\/]+)/);
+              if (linkMatch) {
+                domain = linkMatch[1];
+                if (components.includes(domain)) {
+                  core.setOutput('domain', domain);
+                  core.setOutput('found', 'exact');
+                  console.log(`Found exact match from link: ${domain}`);
+                  return;
+                }
+              }
+            }
+
+            // Function to normalize strings by removing diacritics
+            const normalize = (str) => {
+              return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            };
+
+            // Search by name
+            const searchName = componentName.toLowerCase();
+            const searchNameNormalized = normalize(componentName);
+
+            if (components.includes(searchName)) {
+              core.setOutput('domain', searchName);
+              core.setOutput('found', 'exact');
+              console.log(`Found exact match by name: ${searchName}`);
+              return;
+            } else if (components.includes(searchNameNormalized)) {
+              core.setOutput('domain', searchNameNormalized);
+              core.setOutput('found', 'exact');
+              console.log(`Found exact match by normalized name: ${searchNameNormalized}`);
+              return;
+            }
+
+            core.setOutput('domain', 'unknown');
+            core.setOutput('found', 'none');
+            console.log('No exact match found');
+
+      - name: Apply integration label
+        if: ${{ steps.find_components.outputs.found != 'error' && steps.find_components.outputs.found != 'none' }}
+        uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const domain = '${{ steps.find_components.outputs.domain }}';
+
+            if (!domain || domain === 'unknown') {
+              console.log('No valid integration domain found');
+              return;
+            }
+
+            const labelName = `component: ${domain}`;
+
+            try {
+              // Get discussion data and label info in parallel
+              const [discussionResult, labelResult] = await Promise.allSettled([
+                github.graphql(`
+                  query($nodeId: ID!) {
+                    node(id: $nodeId) {
+                      ... on Discussion {
+                        labels(first: 100) {
+                          nodes {
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                `, {
+                  nodeId: context.payload.discussion.node_id
+                }),
+                github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: labelName
+                })
+              ]);
+
+              // Check if label exists
+              if (labelResult.status === 'rejected') {
+                console.log(`Label ${labelName} does not exist in the repository`);
+
+                await github.graphql(`
+                  mutation($discussionId: ID!, $body: String!) {
+                    addDiscussionComment(input: {
+                      discussionId: $discussionId,
+                      body: $body
+                    }) {
+                      comment {
+                        id
+                      }
+                    }
+                  }
+                `, {
+                  discussionId: context.payload.discussion.node_id,
+                  body: `⚠️ I detected this is about the \`${integrationDomain}\` integration, but the label \`${labelName}\` doesn't exist yet. It will be created during the next label sync.`
+                });
+                return;
+              }
+
+              // Check if discussion already has the label
+              if (discussionResult.status === 'fulfilled') {
+                const currentLabels = discussionResult.value.node.labels.nodes;
+                const hasLabel = currentLabels.some(label => label.name === labelName);
+
+                if (hasLabel) {
+                  console.log(`Label ${labelName} already exists on discussion`);
+                  return;
+                }
+              }
+
+              // Add the label to the discussion using GraphQL
+              await github.graphql(`
+                mutation($labelableId: ID!, $labelIds: [ID!]!) {
+                  addLabelsToLabelable(input: {
+                    labelableId: $labelableId,
+                    labelIds: $labelIds
+                  }) {
+                    clientMutationId
+                  }
+                }
+              `, {
+                labelableId: context.payload.discussion.node_id,
+                labelIds: [labelResult.value.data.node_id]
+              });
+
+              console.log(`Applied label: ${labelName}`);
+
+              // Add a comment to notify about the label
+              await github.graphql(`
+                mutation($discussionId: ID!, $body: String!) {
+                  addDiscussionComment(input: {
+                    discussionId: $discussionId,
+                    body: $body
+                  }) {
+                    comment {
+                      id
+                    }
+                  }
+                }
+              `, {
+                discussionId: context.payload.discussion.node_id,
+                body: `🏷️ I've automatically added the \`${labelName}\` label to help categorize this feature request.`
+              });
+
+            } catch (error) {
+              console.error('Error applying label:', error);
+              // Continue without failing the workflow
+            }
