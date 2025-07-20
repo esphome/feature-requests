@@ -89,7 +89,9 @@ jobs:
             // Try to extract domain from link first
             let domain = '';
             if (componentLink) {
-              const linkMatch = componentLink.match(/\/components\/([^\/]+)/);
+              // Handle both /components/sensor/bme68x_bsec2.html and /components/bme68x_bsec2.html patterns
+              // Extract the last segment before .html or the last segment in the path
+              const linkMatch = componentLink.match(/\/components\/(?:[^\/]+\/)?([^\/]+?)(?:\.html)?(?:[#?].*)?$/);
               if (linkMatch) {
                 domain = linkMatch[1];
                 if (components.includes(domain)) {
