@@ -34,6 +34,8 @@ body:
         Providing a link [to the documentation][docs] helps us categorize the feature request.
 
         [docs]: https://esphome.io/components/
+    validations:
+      required: true
 
   - type: textarea
     id: enhancement_description
