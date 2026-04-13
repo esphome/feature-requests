@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Extract component name and details
         id: extract
-        uses: actions/github-script@v7.0.1
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
         with:
           script: |
             // For edited discussions, we need to fetch the full discussion body
@@ -67,7 +67,7 @@ jobs:
 
       - name: Find matching components
         id: find_components
-        uses: actions/github-script@v7.0.1
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
         with:
           script: |
             const componentName = '${{ steps.extract.outputs.component_name }}';
@@ -130,7 +130,7 @@ jobs:
 
       - name: Apply integration label
         if: ${{ steps.find_components.outputs.found != 'error' && steps.find_components.outputs.found != 'none' }}
-        uses: actions/github-script@v7.0.1
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
         with:
           script: |
             const domain = '${{ steps.find_components.outputs.domain }}';
