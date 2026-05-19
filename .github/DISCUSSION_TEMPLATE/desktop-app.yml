@@ -1,0 +1,46 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for suggesting an enhancement to the ESPHome Desktop App!** 🖥️
+
+        ### ⚠️ Before you submit
+
+        The Desktop App is a **background service** that bundles a Python runtime and runs the ESPHome Builder locally, so users can get started without installing anything else. The interface you interact with still opens in your default browser.
+
+        This form is for requesting **new features or enhancements** to the **native app itself** — installation, packaging, startup, updates, system integration, configuration, and similar.
+
+        **This is NOT for:**
+        - 🎨 Anything you see in the browser → that's the Builder. [Use the "Builder features or enhancements" category](https://github.com/orgs/esphome/discussions/new?category=builder-features-or-enhancements)
+        - 🆘 Support using the Desktop App? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
+        - 🐛 Reporting bugs or issues with the Desktop App → [Report an issue](https://github.com/esphome/esphome-desktop/issues/new/choose)
+
+  - type: textarea
+    id: enhancement_description
+    attributes:
+      label: Describe the enhancement
+      description: What would you like to improve about how the Desktop App installs, runs, updates, or integrates with the operating system?
+      placeholder: |
+        Example: I'd like an option during install to have the Desktop App start automatically when I log in to my computer.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use cases
+      description: How would this improvement make the Desktop App better?
+      placeholder: |
+        Example: I use ESPHome regularly and would prefer not to have to launch the service manually every time I reboot.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else?
+      description: Links to similar implementations, related discussions, or additional context.
+      placeholder: |
+        Example: Link to a related discussion, or a similar feature in another app.
+    validations:
+      required: false
