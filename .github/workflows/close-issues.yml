@@ -1,0 +1,48 @@
+name: Close issues
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  issues: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        with:
+          script: |
+            const body = [
+              '👋 Thanks for your interest in ESPHome!',
+              '',
+              'This repository does **not** accept issues — feature requests are tracked as [Discussions](https://github.com/orgs/esphome/discussions) so the community can upvote and discuss them.',
+              '',
+              '👉 Please open a new discussion here: https://github.com/orgs/esphome/discussions/new/choose',
+              '',
+              'If you are reporting a bug instead, please use the appropriate issue tracker:',
+              '',
+              '- [ESPHome core](https://github.com/esphome/esphome/issues) - compilation issues, runtime crashes and other core issues',
+              '- [Dashboard / Builder](https://github.com/esphome/dashboard/issues) - ESPHome Builder / Dashboard bugs',
+              '- [Documentation](https://github.com/esphome/esphome-docs/issues) - issues with the website and documentation',
+              '- [aioesphomeapi](https://github.com/esphome/aioesphomeapi/issues) - Python API client issues',
+              '- [Home Assistant](https://github.com/home-assistant/core/issues) - issues inside Home Assistant while using ESPHome devices',
+              '',
+              'This issue is being closed automatically.',
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+              state_reason: 'not_planned',
+            });
