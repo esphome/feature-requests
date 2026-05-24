@@ -1,0 +1,103 @@
+name: Close discussions bypassing template
+
+on:
+  discussion:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1  # v3.2.0
+        with:
+          client-id: ${{ vars.ESPHOME_GITHUB_APP_CLIENT_ID }}
+          private-key: ${{ secrets.ESPHOME_GITHUB_APP_PRIVATE_KEY }}
+          permission-discussions: write  # addDiscussionComment, closeDiscussion
+
+      - name: Checkout discussion templates
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          sparse-checkout: .github/DISCUSSION_TEMPLATE
+          sparse-checkout-cone-mode: false
+
+      - name: Extract required template labels
+        id: required
+        env:
+          CATEGORY_SLUG: ${{ github.event.discussion.category.slug }}
+        run: |
+          template=".github/DISCUSSION_TEMPLATE/${CATEGORY_SLUG}.yml"
+          if [ ! -f "$template" ]; then
+            echo "No template found for category '${CATEGORY_SLUG}'; skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if ! labels=$(yq -o=json -I=0 '[.body[] | select(.type != "markdown") | select(.validations.required == true) | .attributes.label]' "$template"); then
+            echo "::error::Failed to parse template ${template}"
+            exit 1
+          fi
+          echo "labels=${labels}" >> "$GITHUB_OUTPUT"
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      - name: Close discussion if template was bypassed
+        if: steps.required.outputs.skip != 'true'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        env:
+          REQUIRED_LABELS: ${{ steps.required.outputs.labels }}
+          CATEGORY_SLUG: ${{ github.event.discussion.category.slug }}
+        with:
+          github-token: ${{ steps.generate-token.outputs.token }}
+          script: |
+            const requiredLabels = JSON.parse(process.env.REQUIRED_LABELS || '[]');
+            if (requiredLabels.length === 0) {
+              console.log('Template has no required fields; nothing to validate.');
+              return;
+            }
+
+            const body = context.payload.discussion.body || '';
+            const missing = requiredLabels.filter(label => !body.includes(`### ${label}`));
+
+            if (missing.length === 0) {
+              console.log('All required template sections are present.');
+              return;
+            }
+
+            console.log(`Missing template sections: ${missing.join(', ')}`);
+
+            const slug = process.env.CATEGORY_SLUG;
+            const commentBody = [
+              '👋 Thanks for opening a discussion!',
+              '',
+              'It looks like this discussion was created without using the form template for this category, so the structured information we need to evaluate it is missing.',
+              '',
+              'Please open a new discussion using the template for this category and fill in all required sections:',
+              '',
+              `👉 https://github.com/orgs/esphome/discussions/new?category=${slug}`,
+              '',
+              'This discussion is being closed automatically.',
+            ].join('\n');
+
+            await github.graphql(`
+              mutation($discussionId: ID!, $body: String!) {
+                addDiscussionComment(input: { discussionId: $discussionId, body: $body }) {
+                  comment { id }
+                }
+              }
+            `, {
+              discussionId: context.payload.discussion.node_id,
+              body: commentBody,
+            });
+
+            await github.graphql(`
+              mutation($discussionId: ID!) {
+                closeDiscussion(input: { discussionId: $discussionId, reason: OUTDATED }) {
+                  discussion { id }
+                }
+              }
+            `, {
+              discussionId: context.payload.discussion.node_id,
+            });
