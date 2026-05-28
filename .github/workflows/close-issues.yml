@@ -25,7 +25,7 @@ jobs:
               '',
               '- [ESPHome core](https://github.com/esphome/esphome/issues) - compilation issues, runtime crashes and other core issues',
               '- [Dashboard / Builder](https://github.com/esphome/dashboard/issues) - ESPHome Builder / Dashboard bugs',
-              '- [Documentation](https://github.com/esphome/esphome-docs/issues) - issues with the website and documentation',
+              '- [Documentation](https://github.com/esphome/esphome.io/issues) - issues with the website and documentation',
               '- [aioesphomeapi](https://github.com/esphome/aioesphomeapi/issues) - Python API client issues',
               '- [Home Assistant](https://github.com/home-assistant/core/issues) - issues inside Home Assistant while using ESPHome devices',
               '',

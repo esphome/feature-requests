@@ -12,7 +12,7 @@ body:
         - 🆘 In need for support? → [Community Forum](https://community.home-assistant.io/c/esphome/36) or join our [Discord chat server](https://esphome.io/chat). You are more likely to get the answer you are looking for in those places.
         - 📄 Improvements to specific component documentation → Use the "Edit this page on GitHub" link at the bottom of that component's documentation page
         - ✏️ Fixing typos or small updates → [Edit directly on the docs site](https://esphome.io/) using the "Edit this page on GitHub" link
-        - 🐛 Reporting documentation errors → [Open an issue in the docs repo](https://github.com/esphome/esphome-docs/issues)
+        - 🐛 Reporting documentation errors → [Open an issue in the docs repo](https://github.com/esphome/esphome.io/issues)
 
   - type: textarea
     id: improvement_description
