@@ -19,7 +19,7 @@ If you're experiencing issues or bugs, please use the correct issue tracker depe
 
 - [ESPHome](https://github.com/esphome/esphome/issues) – for compilation issues, runtime crashes and other core issues
 - [Dashboard](https://github.com/esphome/dashboard/issues) – for ESPHome Builder / Dashboard bugs
-- [Documentation](https://github.com/esphome/esphome-docs/issues) - for issues with the ESPHome website and documentation
+- [Documentation](https://github.com/esphome/esphome.io/issues) - for issues with the ESPHome website and documentation
 - [aioesphomeapi](https://github.com/esphome/aioesphomeapi/issues) - Python API client issues
 - [Home Assistant](https://github.com/home-assistant/core/issues) - For issues that come up inside Home Assistant while using ESPHome devices
 
