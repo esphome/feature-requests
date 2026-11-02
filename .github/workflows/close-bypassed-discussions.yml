@@ -13,14 +13,14 @@ jobs:
     steps:
       - name: Generate a token
         id: generate-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1  # v3.2.0
+        uses: actions/create-github-app-token@v3.2.0
         with:
           client-id: ${{ vars.ESPHOME_GITHUB_APP_CLIENT_ID }}
           private-key: ${{ secrets.ESPHOME_GITHUB_APP_PRIVATE_KEY }}
           permission-discussions: write  # addDiscussionComment, closeDiscussion
 
       - name: Checkout discussion templates
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        uses: actions/checkout@v6.0.2
         with:
           sparse-checkout: .github/DISCUSSION_TEMPLATE
           sparse-checkout-cone-mode: false
@@ -45,7 +45,7 @@ jobs:
 
       - name: Close discussion if template was bypassed
         if: steps.required.outputs.skip != 'true'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        uses: actions/github-script@v9.0.0
         env:
           REQUIRED_LABELS: ${{ steps.required.outputs.labels }}
           CATEGORY_SLUG: ${{ github.event.discussion.category.slug }}
