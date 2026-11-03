@@ -1,7 +1,7 @@
 <a href="https://esphome.io/">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://esphome.io/_static/logo-text-on-dark.svg", alt="ESPHome Logo">
-    <img src="https://esphome.io/_static/logo-text-on-light.svg" alt="ESPHome Logo">
+    <source media="(prefers-color-scheme: dark)" srcset="https://esphome.io/images/logo-text-on-dark.svg">
+    <img src="https://esphome.io/images/logo-text.svg" alt="ESPHome Logo">
   </picture>
 </a>
 
